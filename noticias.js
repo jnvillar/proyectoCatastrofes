@@ -1,4 +1,4 @@
-var articulo = function (titulo,id,contenido,img,tipo,zonas,fecha,imagenes) {
+var articulo = function (titulo,id,contenido,img,tipo,zonas,fecha,imagenes,coordenadas) {
     this.visitas = 0;
     this.likes = 0;
     this.fecha = fecha;
@@ -12,6 +12,7 @@ var articulo = function (titulo,id,contenido,img,tipo,zonas,fecha,imagenes) {
 };
 
 var articulos = [];
+var barrios = [];
 
 var zona = function (nombre,tipo) {
     this.nombre = nombre;
@@ -28,7 +29,7 @@ module.exports ={
         // newNoticia: function (titulo,contenido,img,tipo,zona)
 
         var zona1 = new zona("Saavedra", "Corte Luz");
-        var imagenes = ["http://bucket1.glanacion.com/anexos/fotos/83/actualidad-1859283w620.jpg","http://bucket1.glanacion.com/anexos/fotos/83/actualidad-1859283w620.jpg"];
+        var imagenes = ["http://bucket1.glanacion.com/anexos/fotos/83/actualidad-1859283w620.jpg","http://bucket1.glanacion.com/anexos/fotos/83/actualidad-1859283w620.jpg",-34.536997, -58.466220];
         this.newNoticia("Corte de Luz General en Saavedra", "Debido al alto consumo por el calor sofocante, casi todos los vecinos de Saavedra no disponen de luz actualmente" ,"http://bucket1.glanacion.com/anexos/fotos/83/actualidad-1859283w620.jpg", "Corte Luz", zona1,imagenes);
         var zona2 = new zona("Floresta", "Corte Gas");
         this.newNoticia("Explosion del Gasoducto de Floresta", "Causado por un golpe, ha explotado el gasoducto general de Floresta, hay gran cantidad de heridos y muertos", "https://i.ytimg.com/vi/zhBxfNm3rJE/maxresdefault.jpg","Corte gas",zona2,imagenes);
@@ -67,7 +68,23 @@ module.exports ={
         if(!existe){
             zonasAfectadas.push(lugar);
         }
-        articulos.push(newArticulo)
+        articulos.push(newArticulo);
+
+        existe = false;
+        for(var i=0;i<barrios.length && !existe;i++){
+            if(barrios[i]==lugar.nombre){
+                existe=true;
+            }
+        }
+
+        if(!existe){
+            barrios.push(lugar.nombre);
+        }
+
+    },
+
+    newZone: function (lugar,tipo) {
+        return  new zona(lugar,tipo);
     },
 
     getNoticias: function () {
@@ -86,5 +103,9 @@ module.exports ={
             };
         }
     },
+
+    getBarrios: function () {
+        return barrios;
+    }
 
 }

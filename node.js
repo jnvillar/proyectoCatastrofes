@@ -66,8 +66,26 @@ app.listen(process.env.PORT || 3000);
 app.get('/', function (req, res) {
     var noticias = articulos.getNoticias();
     var zonas = articulos.getZonas();
-    res.render('index',{noticias:noticias,zonas:zonas});
+    console.log(zonas);
+    res.render('index',{noticias:noticias.reverse(),zonas:zonas});
 });
+
+app.get('/newNews', function (req, res) {
+    var noticias = articulos.getNoticias();
+    var zonas = articulos.getZonas();
+    var barrios = articulos.getBarrios();
+    res.render('formArticle',{noticias:noticias,zonas:zonas,barrios:barrios});
+});
+
+app.post('/newNews', function (req, res) {
+    var article = req.body;
+    var zone = articulos.newZone(article.zone,article.tipo);
+    console.log(zone);
+    articulos.newNoticia(article.titulo,article.contenido,article.img,article.tipo,zone,article.imagenes);
+    res.redirect('./');
+
+});
+
 
 app.get('/noticia/:id', function (req, res) {
     var noticia = articulos.getNoticia(req.params.id);
@@ -75,6 +93,7 @@ app.get('/noticia/:id', function (req, res) {
     console.log(noticia);
     res.render('single',{noticia:noticia,zonas:zonas});
 });
+
 
 app.get('/zonasAfectadas/:zona',function (req,res) {
    var zonas = articulos.getZonas();
