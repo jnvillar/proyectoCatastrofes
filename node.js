@@ -79,7 +79,7 @@ app.get('/newNews', function (req, res) {
 
 app.post('/newNews', function (req, res) {
     var article = req.body;
-    var zone = articulos.newZone(article.zone,article.tipo);
+    var zone = articulos.newZone(article.lugar,article.tipo);
     console.log(zone);
     articulos.newNoticia(article.titulo,article.contenido,article.img,article.tipo,zone,article.imagenes);
     res.redirect('./');

@@ -172,6 +172,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="col-md-1"></div>
         <div class="clearfix"></div>
+        <div id="map" style="width:100%;height:500px"></div>
     </div>
 </div>
 <!-- content-section-ends-here -->
@@ -192,8 +193,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </ul>
             </div>
             <div class="clearfix"></div>
+
         </div>
     </div>
+    <script>
+
+
+
+        function myMap() {
+
+            belgrano = new google.maps.LatLng(-34.559144, -58.452589);
+            urquiza = new google.maps.LatLng(-34.572949, -58.492781);
+            floresta = new google.maps.LatLng(-34.627254, -58.485310);
+            bernal = new google.maps.LatLng(-34.706355, -58.278985);
+            saavedra = new google.maps.LatLng(-34.553830, -58.490696);
+
+            var myCenter = new google.maps.LatLng(-34.559144, -58.452589);
+            var mapCanvas = document.getElementById("map");
+            var mapOptions = {center: myCenter, zoom: 10};
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+            var marker = new google.maps.Marker({position:belgrano});
+            marker.setMap(map);
+            var marker2 = new google.maps.Marker({position:urquiza});
+            marker2.setMap(map);
+            var marker3 = new google.maps.Marker({position:floresta});
+            marker3.setMap(map);
+            var marker4 = new google.maps.Marker({position:bernal});
+            marker4.setMap(map);
+            var marker5 = new google.maps.Marker({position:saavedra});
+            marker5.setMap(map);
+
+
+
+
+        }
+    </script>
+
+    <!--<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKtsEGfAQTsOranj0shsAQuX9R9_VmRqo&callback=myMap">
+
+
+
+    </script>
 </div>
 <!-- footer-section-ends-here -->
 <script type="text/javascript">
